@@ -1,7 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap');
+
 :root{
-    background-color:blue;
+    --yellow: #FFFD8F;
+    --light-green: #C6D870;
+    --sage: #8FA31E;
+    --dark-green: #556B2F;
+    --brown: #3A3131;
+    --font: "Jetbrains Mono"
 }
 
-.body{
-    background-color: black;
+.h1{
+    font-family: var(--font);
 }
