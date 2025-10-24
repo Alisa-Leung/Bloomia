@@ -4,9 +4,16 @@
     --sage: #8FA31E;
     --dark-green: #556B2F;
     --brown: #3A3131;
-    --font: "Jetbrains Mono"
+    --font: "Outfit";
+}
+html{
+    width: 300px;
+    height: 400px;
 }
 
-.h1{
+body{
+    background-color: var(--light-green);
+}
+h1{
     font-family: var(--font);
 }
