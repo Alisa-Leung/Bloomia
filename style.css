@@ -1,3 +1,4 @@
+/*style variables*/
 :root{
     --off-white: #fefae0;
     --dark-pink: #fdaaaa;
@@ -12,23 +13,29 @@
     --warm-brown: #b99470;
     --dark-brown: #54473f;
     --outfit: "Outfit";
-    --mochi: "Borel";
+    --borel: "Borel";
 }
 
-html{
+/*setup*/
+*{
+    margin: 0px;
+    padding: 0px;
+    background-color: var(--off-white);
     width: 300px;
     height: 400px;
 }
+
+/*class selectors*/
 body{
-    background-color: var(--off-white);
     font-family: var(--outfit);
 }
 h1{
-    font-family: var(--mochi);
+    font-family: var(--borel);
     text-align: center;
     color: var(--dark-brown);
 }
 
+/*id selectors*/
 #logo{
     width: 25%;
     height: 25%;

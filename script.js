@@ -1,12 +1,12 @@
 //automatic greeting based on time
-const hour = new Date().getHours();
-const greetingElement = document.getElementById("greeting");
-let greetingMessage;
-if (hour < 12){
-    greetingMessage = "good morning, bloomer";
-} else if (hour < 18){
-    greetingMessage = "good afternoon, bloomer";
-} else{
-    greetingMessage = "good evening, bloomer";
-}
-greetingElement.innerHTML = greetingMessage;
+document.addEventListener("DOMContentLoaded", function(){
+    const hour = new Date().getHours();
+    var greetingElement = document.getElementById("greeting");
+    if (hour < 12){
+        greetingElement.innerHTML = "good morning, bloomer.";
+    } else if (hour < 18){
+        greetingElement.innerHTML = "good afternoon, bloomer.";
+    } else{
+        greetingElement.innerHTML = "good evening, bloomer.";
+    }
+});
