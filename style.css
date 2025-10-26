@@ -1,19 +1,37 @@
 :root{
-    --yellow: #FFFD8F;
-    --light-green: #C6D870;
-    --sage: #8FA31E;
-    --dark-green: #556B2F;
-    --brown: #3A3131;
-    --font: "Outfit";
+    --off-white: #fefae0;
+    --dark-pink: #fdaaaa;
+    --light-pink: #ffd5d5;
+    --peach: #ffd6ba;
+    --cream: #fff9bd;
+    --yellow-green: #dee791;
+    --light-green: #a3dc9a;
+    --mid-green: #59ac77;
+    --dark-green: #3a6f43;
+    --cool-brown: #9a7e6f;
+    --warm-brown: #b99470;
+    --dark-brown: #54473f;
+    --outfit: "Outfit";
+    --mochi: "Borel";
 }
+
 html{
     width: 300px;
     height: 400px;
 }
-
 body{
-    background-color: var(--light-green);
+    background-color: var(--off-white);
+    font-family: var(--outfit);
 }
 h1{
-    font-family: var(--font);
+    font-family: var(--mochi);
+    text-align: center;
+    color: var(--dark-brown);
+}
+
+#logo{
+    width: 25%;
+    height: 25%;
+    display: block;
+    margin: auto;
 }
