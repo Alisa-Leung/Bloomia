@@ -48,11 +48,20 @@ h1{
     text-align: center;
     color: var(--dark-brown);
 }
+p{
+    text-align: center;
+    font-size: var(--medium);
+}
 
 /*id selectors*/
 #logo{
     width: 25%;
     height: 25%;
+    display: block;
+    margin: auto;
+}
+#imagePreview{
+    max-width: 200px;
     display: block;
     margin: auto;
 }
