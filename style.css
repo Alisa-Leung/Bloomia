@@ -1,5 +1,6 @@
 /*style variables*/
 :root{
+    /*colors*/
     --off-white: #fefae0;
     --dark-pink: #fdaaaa;
     --light-pink: #ffd5d5;
@@ -12,8 +13,18 @@
     --cool-brown: #9a7e6f;
     --warm-brown: #b99470;
     --dark-brown: #54473f;
+
+    /*fonts*/
     --outfit: "Outfit";
     --borel: "Borel";
+
+    /*sizing*/
+    --small: 8px;
+    --medium: 16px;
+    --large: 20px;
+    --xlarge: 30px;
+    --xxlarge: 40px;
+    --xxxlarge: 90px;
 }
 
 /*setup*/
@@ -21,11 +32,14 @@
     margin: 0px;
     padding: 0px;
     background-color: var(--off-white);
-    width: 300px;
-    height: 400px;
 }
 
 /*class selectors*/
+html{
+    width: 300px;
+    height: 400px;
+    padding: var(--small);
+}
 body{
     font-family: var(--outfit);
 }
