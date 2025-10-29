@@ -1,11 +1,36 @@
+//event listeners
 document.addEventListener("DOMContentLoaded", () => {
     //constants
-    const fileInput = document.getElementById("photoFile");
-    const imagePreview = document.getElementById("imagePreview");
-    const imageGallery = document.getElementsByClassName("galleryImage");
     //running functions
-    timeGreeting();
+    document.getElementById("photoFile").addEventListener("change", (event) => {
+        //checks if there have been files uploaded
+        const files = event.target.files;
+        if (files.length === 0){
+            return;
+        }
+        //finds data url of uploaded images
+        const readers = [];
+        for (let i = 0; i < files.length; i ++){
+            const file = files[i];
+            const reader = new FileReader();
+            readers.push(new Promise((resolve) =>{
+                reader.onload = (e) => resolve(e.target.result);
+                reader.readAsDataURL(file);
+            }));
+        }
+        Promise.all(readers).then(newImageUrls => {
+            chrome.storage.local.get(["uploadedImages"], (result) => {
+                const existingImages = result.uploadedImages || [];
+                const allImages = [...existingImages, ...newImageUrls];
 
+                chrome.storage.local.set({uploadedImages: allImages}, () => {
+                    displayImages(allImages);
+                });
+            })
+        });
+        });
+    timeGreeting();
+    loadAndDisplayImages();
 });
 
 //functions
@@ -20,4 +45,21 @@ function timeGreeting(){
     } else{
         greetingElement.innerHTML = "Good evening, bloomer.";
     }
+}
+//function that takes in an array of image urls and appendds all of them to the gallerycontainer div
+function displayImages(imageUrls){
+    const displayElement = document.getElementById("galleryContainer");
+    imageUrls.forEach(url => {
+        const img = document.createElement("img");
+        img.src = url;
+        img.class = "galleryImage";
+        displayElement.appendChild(img);
+    });
+}
+//function that loads images from storage and runs the displayimages() function
+function loadAndDisplayImages(){
+    chrome.storage.local.get(["uploadedImages"], (result) => {
+        const imageUrls = result.uploadedImages || [];
+        displayImages(imageUrls);
+    });
 }
