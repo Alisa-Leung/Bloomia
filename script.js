@@ -33,7 +33,7 @@ document.addEventListener("DOMContentLoaded", () => {
             })
         });
     });
-    document.getElementById("clearImages").addEventListener("click", (event) => {
+    document.getElementById("clearImageButton").addEventListener("click", (event) => {
         clearStoredImages();
     })
     //styling buttons and their children
@@ -94,6 +94,8 @@ function clearStoredImages(){
     chrome.storage.local.remove("uploadedImages", () => {
         const displayElement = document.getElementById("gallery");
         displayElement.innerHTML = "";
+        const modal = document.getElementById("modal");
+        modal.remove();
     });
 }
 //checks if there is overflow to adjust spacing
@@ -218,7 +220,7 @@ function showAnalysisResult(message){
     }
     modalContent.appendChild(resultText);
     modal.appendChild(modalContent);
-    document.getElementById("modal").appendChild(modal);
+    document.getElementById("modalDiv").appendChild(modal);
     modal.onclick = (e) => {
         if (e.target === modal){
             modal.remove();

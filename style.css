@@ -38,7 +38,7 @@
 /*class selectors*/
 html{
     width: 256px;
-    max-height: 416px;
+    height: 416px;
     overflow-y: auto;
     padding: var(--medium);
 }
