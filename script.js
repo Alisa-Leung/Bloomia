@@ -87,6 +87,7 @@ function loadAndDisplayImages(){
     chrome.storage.local.get(["uploadedImages"], (result) => {
         const imageUrls = result.uploadedImages || [];
         displayImages(imageUrls);
+        console.log(imageUrls);
     });
 }
 //clears images
@@ -226,19 +227,4 @@ function showAnalysisResult(message){
             document.getElementById("spacer").style.height = "0px"
         }
     }
-}
-
-//notification sender
-const time = new Date();
-const hour = time.getHours();
-const minute = time.getMinutes();
-if (hour === 6 && minute === 13){
-    chrome.runtime.sendMessage({
-        type: "showNotification",
-        options: {
-            title: "Daily Reminder!",
-            message: "Click here to view your tasks for today!",
-            iconUrl: "images/logo.png"
-        }
-    })
 }
