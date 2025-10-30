@@ -30,7 +30,8 @@ document.addEventListener("DOMContentLoaded", () => {
         });
         });
     timeGreeting();
-    loadAndDisplayImages();
+    clearStoredImages();
+    loadAndDisplayImages(); //update for later: make it so that only one image appears -- right now its reiterating the list and re-displaying every item
 });
 
 //functions
@@ -52,7 +53,7 @@ function displayImages(imageUrls){
     imageUrls.forEach(url => {
         const img = document.createElement("img");
         img.src = url;
-        img.class = "galleryImage";
+        img.className = "galleryImage";
         displayElement.appendChild(img);
     });
 }
@@ -61,5 +62,12 @@ function loadAndDisplayImages(){
     chrome.storage.local.get(["uploadedImages"], (result) => {
         const imageUrls = result.uploadedImages || [];
         displayImages(imageUrls);
+    });
+}
+//clears images
+function clearStoredImages(){
+    chrome.storage.local.remove("uploadedImages", () => {
+        const displayElement = document.getElementById("galleryContainer");
+        displayElement.innerHTML = "";
     });
 }

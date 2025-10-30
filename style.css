@@ -60,10 +60,19 @@ p{
     display: block;
     margin: auto;
 }
+#galleryContainer{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: var(--sm);
+    overflow: scroll;
+}
+
+/*class selectors*/
 .galleryImage{
-    max-width: 90px;
+    max-width: 80px;
     display: block;
-    margin: auto;
     margin-left: var(--sm);
     margin-right: var(--sm);
 }
