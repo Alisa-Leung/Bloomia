@@ -72,6 +72,7 @@ function displayImages(imageUrls){
         img.src = url;
         img.className = "galleryImage";
         displayElement.appendChild(img);
+        checkOverflow(document.getElementById("gallery"));
     });
 }
 //function that loads images from storage and runs the displayimages() function
@@ -87,4 +88,20 @@ function clearStoredImages(){
         const displayElement = document.getElementById("gallery");
         displayElement.innerHTML = "";
     });
+}
+//checks if there is overflow to adjust spacing
+function checkOverflow(element){
+    const isOverflowing = element.scrollHeight > element.clientHeight;
+    const galleryImages = document.getElementsByClassName("galleryImage");
+    if (isOverflowing){
+        Array.from(galleryImages).forEach(galleryImage => {
+            galleryImage.style.width = "75px";
+            galleryImage.style.height = "75px";
+        });
+    } else {
+        Array.from(galleryImages).forEach(galleryImage => {
+            galleryImage.style.width = "80px";
+            galleryImage.style.height = "80px";
+        })
+    }
 }

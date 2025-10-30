@@ -68,6 +68,11 @@ span{
     display: block;
     margin: auto;
     margin-bottom: var(--small);
+    border-radius: 100%;
+    transition: transform 0.3s ease;
+}
+#logo:hover{
+    transform: translateY(-5px);
 }
 #galleryContainer{
     display: flex;
@@ -92,6 +97,8 @@ span{
     display: block;
     object-fit: cover;
     object-position: center;
+    border-radius: var(--small);
+    cursor: pointer;
 }
 .customButton{
     display: flex;
