@@ -28,7 +28,10 @@ document.addEventListener("DOMContentLoaded", () => {
                 });
             })
         });
-        });
+    });
+    document.getElementById("clearImages").addEventListener("click", (event) => {
+        clearStoredImages();
+    })
     timeGreeting();
     loadAndDisplayImages(); //update for later: make it so that only one image appears -- right now its reiterating the list and re-displaying every item
 });

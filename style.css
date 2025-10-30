@@ -38,6 +38,8 @@
 html{
     width: 300px;
     height: 400px;
+    max-width: 300px;
+    max-height: 400px;
     padding: var(--small);
 }
 body{
@@ -66,6 +68,7 @@ p{
     justify-content: center;
     align-items: center;
     gap: var(--small);
+    overflow-y: auto;
 }
 
 /*class selectors*/
