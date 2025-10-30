@@ -1,4 +1,4 @@
-import { GoogleGenAI } from "@google/genai";
+import { GoogleGenAI } from "/node_modules/@google/genai";
 
 const ai = new GoogleGenAI({});
 
