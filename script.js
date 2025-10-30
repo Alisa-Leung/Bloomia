@@ -116,11 +116,36 @@ function checkOverflow(element){
 async function analyzePlant(imageUrl, imgElement){
     try{
         //visually loading
-        imgElement.style.border = "3px solid #59ac77";
+        const loadingBar = document.createElement("hr");
+        const existingBar = document.getElementById("loadingBar");
+        if (existingBar){
+            existingBar.remove();
+        }
+        loadingBar.style.backgroundColor = "#59ac77";
+        loadingBar.style.width = "0%";
+        loadingBar.style.height = "16px";
+        loadingBar.style.border = "none";
+        loadingBar.style.borderRadius = "8px";
+        loadingBar.style.margin = "0";
+        loadingBar.style.marginTop = "8px";
+        loadingBar.style.marginBottom = "8px";
+        loadingBar.style.display = "block";
+        loadingBar.id = "loadingBar";
+        loadingBar.style.transition = "width 0.2s ease-in-out";
+        document.getElementById("bar").append(loadingBar);
         showAnalysisResult("Analyzing your plant...");
+        //animated progress bar
+        let progress = 0;
+        const progressInterval = setInterval(() => {
+            if (progress < 100){
+                progress += Math.random()*20
+                loadingBar.style.width = `${Math.min(progress, 90)}%`;
+            }
+        }, 300);
         //info from data url
         const base64Data = imageUrl.split(",")[1];
         const mimeType = imageUrl.split(";")[0].split(":")[1];
+        loadingBar.style.width = "50%";
         //api call
         const response = await fetch(
             `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${geminiAPIKey}`,
@@ -134,15 +159,12 @@ async function analyzePlant(imageUrl, imgElement){
                         parts: [
                             {
                                 text: `You are a plant expert. Analyze this image and provide the following:
-                                1. Is this a plant? (yes/no answer only)
-                                2. If yes, what type of plant is it? (common name and scientific name if possible)
-                                3. Brief care tips (watering, sunlight, special notes; please write in full sentences)
+                                1. If this is indeed a plant, what type of plant is it? (common name and scientific name if possible); if it is not a plant, please indicate so.
+                                2. Brief care tips that are specific to the state of the image; the state of the plant is acknowledged in the tips (watering, sunlight, special notes; please write in full sentences)
                                 Keep your response concise and friendly.
                                 Format as:
-                                **Is this a plant?** [answer]
                                 **Plant type:** [name]
                                 **Care tips:** [tips]`
-
                             },
                             {
                                 inline_data: {
@@ -166,10 +188,14 @@ async function analyzePlant(imageUrl, imgElement){
         showAnalysisResult(`Error: ${error.message}`);
     } finally {
         setTimeout(() => {
-            imgElement.style.border = "none";
-        }, 2000);
+            loadingBar.style.width = "100%";
+            loadingBar.style.transition = "opacity 0.5s ease";
+            loadingBar.style.opacity = "0";
+            setTimeout(() => loadingBar.remove(), 500);
+        }, 500);
     }
 }
+//creates section at the bottom of the extension
 function showAnalysisResult(message){
     const existingModal = document.getElementById("analysisModal");
     if (existingModal){
@@ -178,19 +204,21 @@ function showAnalysisResult(message){
     const modal = document.createElement("div");
     modal.id = "analysisModal";
     modal.className = "modal";
+    modal.style.padding = "8px";
     const modalContent = document.createElement("div");
     modalContent.className = "modalContent";
-    const closeButton = document.createElement("span");
-    closeButton.className = "closeModal";
-    closeButton.innerHTML = "x";
-    closeButton.onclick = () => modal.remove();
     const resultText = document.createElement("div");
     resultText.className = "analysisText";
     resultText.innerHTML = message.replace(/\n/g, "<br>").replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>");
-    modalContent.appendChild(closeButton);
+    if (message == "Analyzing your plant..."){
+        resultText.style.display = "flex";
+        resultText.style.justifyContent = "center";
+    } else{
+        resultText.style.justifyContent = "left";
+    }
     modalContent.appendChild(resultText);
     modal.appendChild(modalContent);
-    document.body.appendChild(modal);
+    document.getElementById("modal").appendChild(modal);
     modal.onclick = (e) => {
         if (e.target === modal){
             modal.remove();
