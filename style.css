@@ -37,8 +37,6 @@
 /*class selectors*/
 html{
     width: 300px;
-    height: 400px;
-    max-width: 300px;
     max-height: 400px;
     padding: var(--small);
 }
@@ -63,6 +61,7 @@ p{
     margin: auto;
 }
 #galleryContainer{
+    max-height: 256px;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
