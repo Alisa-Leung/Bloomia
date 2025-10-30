@@ -94,8 +94,6 @@ function clearStoredImages(){
     chrome.storage.local.remove("uploadedImages", () => {
         const displayElement = document.getElementById("gallery");
         displayElement.innerHTML = "";
-        const modal = document.getElementById("modal");
-        modal.remove();
     });
 }
 //checks if there is overflow to adjust spacing
@@ -134,6 +132,7 @@ async function analyzePlant(imageUrl, imgElement){
         loadingBar.style.display = "block";
         loadingBar.id = "loadingBar";
         loadingBar.style.transition = "width 0.2s ease-in-out";
+        document.getElementById("spacer").style.height = "8px";
         document.getElementById("bar").append(loadingBar);
         showAnalysisResult("Analyzing your plant...");
         //animated progress bar
@@ -163,7 +162,7 @@ async function analyzePlant(imageUrl, imgElement){
                                 text: `You are a plant expert. Analyze this image and provide the following:
                                 1. If this is indeed a plant, what type of plant is it? (common name and scientific name if possible); if it is not a plant, please indicate so.
                                 2. Brief care tips that are specific to the state of the image; the state of the plant is acknowledged in the tips (watering, sunlight, special notes; please write in full sentences)
-                                Keep your response concise and friendly.
+                                Keep your response concise and friendly. Do not include an opening statement. Only include the format given.
                                 Format as:
                                 **Plant type:** [name]
                                 **Care tips:** [tips]`
@@ -224,6 +223,22 @@ function showAnalysisResult(message){
     modal.onclick = (e) => {
         if (e.target === modal){
             modal.remove();
+            document.getElementById("spacer").style.height = "0px"
         }
     }
+}
+
+//notification sender
+const time = new Date();
+const hour = time.getHours();
+const minute = time.getMinutes();
+if (hour === 6 && minute === 13){
+    chrome.runtime.sendMessage({
+        type: "showNotification",
+        options: {
+            title: "Daily Reminder!",
+            message: "Click here to view your tasks for today!",
+            iconUrl: "images/logo.png"
+        }
+    })
 }

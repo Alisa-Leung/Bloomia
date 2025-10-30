@@ -41,6 +41,7 @@ html{
     height: 416px;
     overflow-y: auto;
     padding: var(--medium);
+    padding-bottom: var(--medium);
 }
 body{
     font-family: var(--outfit);
@@ -99,6 +100,12 @@ span{
     display: flex;
     justify-content: center;
     align-items: center;
+}
+#spacer{
+    height: var(--medium);
+}
+#clearImageButton{
+    margin-bottom: 0px;
 }
 /*class selectors*/
 .galleryImage{
