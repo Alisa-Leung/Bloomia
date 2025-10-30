@@ -56,6 +56,9 @@ p{
     font-size: var(--medium);
     margin-top: var(--small);
 }
+span{
+    background-color: var(--light-pink);
+}
 
 /*id selectors*/
 #logo{
@@ -86,6 +89,22 @@ p{
     background-color: var(--light-pink);
     margin: auto;
     margin-top: var(--small);
+    border-radius: var(--small);
+    cursor: pointer;
+    padding: var(--small);
+    font-size: var(--medium);
+}
+#customFile{
+    display: flex;
+    justify-content: center;
+    background-color: var(--light-pink);
+    font-family: var(--outfit);
+    border-radius: var(--small);
+    cursor: pointer;
+    padding: var(--small);
+    margin-top: var(--small);
+    margin-bottom: var(--small);
+    font-size: var(--medium);
 }
 
 /*class selectors*/
