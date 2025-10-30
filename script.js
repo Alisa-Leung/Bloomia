@@ -30,7 +30,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
         });
     timeGreeting();
-    clearStoredImages();
     loadAndDisplayImages(); //update for later: make it so that only one image appears -- right now its reiterating the list and re-displaying every item
 });
 
@@ -50,6 +49,7 @@ function timeGreeting(){
 //function that takes in an array of image urls and appendds all of them to the gallerycontainer div
 function displayImages(imageUrls){
     const displayElement = document.getElementById("galleryContainer");
+    displayElement.innerHTML = "";
     imageUrls.forEach(url => {
         const img = document.createElement("img");
         img.src = url;

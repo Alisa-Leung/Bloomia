@@ -65,14 +65,11 @@ p{
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    gap: var(--sm);
-    overflow: scroll;
+    gap: var(--small);
 }
 
 /*class selectors*/
 .galleryImage{
     max-width: 80px;
     display: block;
-    margin-left: var(--sm);
-    margin-right: var(--sm);
 }
