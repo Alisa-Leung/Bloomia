@@ -11,13 +11,17 @@
     <h1 id="greeting"></h1>
     <img id="logo" src="images/logo.png"/>
     <p>Upload a photo here.</p>
-    <label id="customFile">
+    <label class="customButton">
       <input type="file" id="photoFile" accept="image/*" hidden>
+      <img class="icon" src="images/add.png"/>
       <span>Select File</span>
     </label>
     <div id="galleryContainer">
       <div id="gallery"></div>
     </div>
-    <button id="clearImages">Clear Images</button>
+    <label class="customButton">
+      <img class="icon" src="images/delete.png"/>
+      <span id="clearImages">Clear Images</span>
+    </label>
   </body>
 </html>

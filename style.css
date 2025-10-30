@@ -83,20 +83,19 @@ span{
     gap: var(--small);
     overflow-y: auto;
 }
-#clearImages{
+
+/*class selectors*/
+.galleryImage{
+    width: 80px;
+    height: 80px;
     display: block;
-    border: none;
-    background-color: var(--light-pink);
-    margin: auto;
-    margin-top: var(--small);
-    border-radius: var(--small);
-    cursor: pointer;
-    padding: var(--small);
-    font-size: var(--medium);
+    object-fit: cover;
+    object-position: center;
 }
-#customFile{
+.customButton{
     display: flex;
     justify-content: center;
+    align-items: center;
     background-color: var(--light-pink);
     font-family: var(--outfit);
     border-radius: var(--small);
@@ -106,12 +105,6 @@ span{
     margin-bottom: var(--small);
     font-size: var(--medium);
 }
-
-/*class selectors*/
-.galleryImage{
-    width: 80px;
-    height: 80px;
-    display: block;
-    object-fit: cover;
-    object-position: center;
+.icon{
+    background-color: var(--light-pink);
 }
