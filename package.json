@@ -1,0 +1,22 @@
+{
+  "name": "extension",
+  "version": "1.0.0",
+  "description": "Congressional App Challenge",
+  "main": "ai.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Alisa-Leung/Extension.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Alisa-Leung/Extension/issues"
+  },
+  "homepage": "https://github.com/Alisa-Leung/Extension#readme",
+  "dependencies": {
+    "@google/generative-ai": "^0.24.1"
+  }
+}

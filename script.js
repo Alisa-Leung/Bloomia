@@ -105,3 +105,18 @@ function checkOverflow(element){
         })
     }
 }
+
+//chrome ai stuff
+// async function checkAIAvailability(){
+//     try{
+//         if ("ai" in window && "languageModel" in window.ai){
+//             const availability = await window.ai.languageModel.capabilities();
+//             console.log("Chrome AI available:", availability.available);
+//             return availability.available === "readily";
+//         }
+//         return false;
+//     } catch (error) {
+//         console.log("Chrome AI not available:", error);
+//         return false;
+//     }
+// }
