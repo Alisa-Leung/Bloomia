@@ -1,3 +1,6 @@
+//gemini api key
+const geminiAPIKey = "AIzaSyCnwR6MvId-bK9c4p6-fQ0XRhfAb5FwbNY";
+
 //event listeners
 document.addEventListener("DOMContentLoaded", () => {
     //constants
@@ -67,10 +70,14 @@ function timeGreeting(){
 function displayImages(imageUrls){
     const displayElement = document.getElementById("gallery");
     displayElement.innerHTML = "";
-    imageUrls.forEach(url => {
+    imageUrls.forEach((url, index) => {
         const img = document.createElement("img");
         img.src = url;
         img.className = "galleryImage";
+        //ai stuff
+        img.dataset.index = index;
+        img.addEventListener("click", () => analyzePlant(url, img));
+        
         displayElement.appendChild(img);
         checkOverflow(document.getElementById("gallery"));
     });
@@ -105,18 +112,88 @@ function checkOverflow(element){
         })
     }
 }
+//plant analysis
+async function analyzePlant(imageUrl, imgElement){
+    try{
+        //visually loading
+        imgElement.style.border = "3px solid #59ac77";
+        showAnalysisResult("Analyzing your plant...");
+        //info from data url
+        const base64Data = imageUrl.split(",")[1];
+        const mimeType = imageUrl.split(";")[0].split(":")[1];
+        //api call
+        const response = await fetch(
+            `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${geminiAPIKey}`,
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    contents: [{
+                        parts: [
+                            {
+                                text: `You are a plant expert. Analyze this image and provide the following:
+                                1. Is this a plant? (yes/no answer only)
+                                2. If yes, what type of plant is it? (common name and scientific name if possible)
+                                3. Brief care tips (watering, sunlight, special notes; please write in full sentences)
+                                Keep your response concise and friendly.
+                                Format as:
+                                **Is this a plant?** [answer]
+                                **Plant type:** [name]
+                                **Care tips:** [tips]`
 
-//chrome ai stuff
-// async function checkAIAvailability(){
-//     try{
-//         if ("ai" in window && "languageModel" in window.ai){
-//             const availability = await window.ai.languageModel.capabilities();
-//             console.log("Chrome AI available:", availability.available);
-//             return availability.available === "readily";
-//         }
-//         return false;
-//     } catch (error) {
-//         console.log("Chrome AI not available:", error);
-//         return false;
-//     }
-// }
+                            },
+                            {
+                                inline_data: {
+                                    mime_type: mimeType,
+                                    data: base64Data
+                                }
+                            }
+                        ]
+                    }]
+                })
+            }
+        );
+        if (!response.ok){
+            throw new Error(`API Error: ${response.status} ${response.statusText}`);
+        }
+        const data = await response.json();
+        const result = data.candidates[0].content.parts[0].text;
+        showAnalysisResult(result);
+    } catch (error){
+        console.error("Analysis error:", error);
+        showAnalysisResult(`Error: ${error.message}`);
+    } finally {
+        setTimeout(() => {
+            imgElement.style.border = "none";
+        }, 2000);
+    }
+}
+function showAnalysisResult(message){
+    const existingModal = document.getElementById("analysisModal");
+    if (existingModal){
+        existingModal.remove();
+    }
+    const modal = document.createElement("div");
+    modal.id = "analysisModal";
+    modal.className = "modal";
+    const modalContent = document.createElement("div");
+    modalContent.className = "modalContent";
+    const closeButton = document.createElement("span");
+    closeButton.className = "closeModal";
+    closeButton.innerHTML = "x";
+    closeButton.onclick = () => modal.remove();
+    const resultText = document.createElement("div");
+    resultText.className = "analysisText";
+    resultText.innerHTML = message.replace(/\n/g, "<br>").replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>");
+    modalContent.appendChild(closeButton);
+    modalContent.appendChild(resultText);
+    modal.appendChild(modalContent);
+    document.body.appendChild(modal);
+    modal.onclick = (e) => {
+        if (e.target === modal){
+            modal.remove();
+        }
+    }
+}
