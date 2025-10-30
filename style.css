@@ -32,13 +32,14 @@
     margin: 0px;
     padding: 0px;
     background-color: var(--off-white);
+    font-family: var(--outfit);
 }
 
 /*class selectors*/
 html{
-    width: 300px;
+    width: 256px;
     max-height: 400px;
-    padding: var(--small);
+    padding: var(--medium);
 }
 body{
     font-family: var(--outfit);
@@ -47,10 +48,13 @@ h1{
     font-family: var(--borel);
     text-align: center;
     color: var(--dark-brown);
+    font-size: var(--large);
+    overflow: visible;
 }
 p{
     text-align: center;
     font-size: var(--medium);
+    margin-top: var(--small);
 }
 
 /*id selectors*/
@@ -59,15 +63,29 @@ p{
     height: 25%;
     display: block;
     margin: auto;
+    margin-bottom: var(--small);
 }
 #galleryContainer{
-    max-height: 256px;
+    display: flex;
+    justify-content: center;
+}
+#gallery{
+    width: 256px;
+    height: 168px;
+    max-height: 168px;
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
+    justify-content: flex-start;
+    align-items: flex-start;
     gap: var(--small);
     overflow-y: auto;
+}
+#clearImages{
+    display: block;
+    border: none;
+    background-color: var(--light-pink);
+    margin: auto;
+    margin-top: var(--small);
 }
 
 /*class selectors*/

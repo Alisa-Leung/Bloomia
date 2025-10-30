@@ -49,9 +49,9 @@ function timeGreeting(){
         greetingElement.innerHTML = "Good evening, bloomer.";
     }
 }
-//function that takes in an array of image urls and appendds all of them to the gallerycontainer div
+//function that takes in an array of image urls and appendds all of them to the gallery div
 function displayImages(imageUrls){
-    const displayElement = document.getElementById("galleryContainer");
+    const displayElement = document.getElementById("gallery");
     displayElement.innerHTML = "";
     imageUrls.forEach(url => {
         const img = document.createElement("img");
@@ -70,7 +70,7 @@ function loadAndDisplayImages(){
 //clears images
 function clearStoredImages(){
     chrome.storage.local.remove("uploadedImages", () => {
-        const displayElement = document.getElementById("galleryContainer");
+        const displayElement = document.getElementById("gallery");
         displayElement.innerHTML = "";
     });
 }
