@@ -58,6 +58,7 @@ p{
 }
 span{
     background-color: var(--light-pink);
+    transition: all 0.3s ease;
 }
 
 /*id selectors*/
@@ -104,7 +105,19 @@ span{
     margin-top: var(--small);
     margin-bottom: var(--small);
     font-size: var(--medium);
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6 px rgba(0, 0, 0, 0.1);
+}
+.customButton:hover{
+    background-color: var(--dark-pink);
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+.customButton:active{
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 .icon{
     background-color: var(--light-pink);
+    transition: all 0.3s ease;
 }

@@ -1,6 +1,7 @@
 //event listeners
 document.addEventListener("DOMContentLoaded", () => {
     //constants
+    const buttons = document.getElementsByClassName("customButton");
     //running functions
     document.getElementById("photoFile").addEventListener("change", (event) => {
         //checks if there have been files uploaded
@@ -31,6 +32,19 @@ document.addEventListener("DOMContentLoaded", () => {
     });
     document.getElementById("clearImages").addEventListener("click", (event) => {
         clearStoredImages();
+    })
+    //styling buttons and their children
+    Array.from(buttons).forEach(button =>{
+        button.addEventListener("mouseenter", () => {
+            Array.from(button.children).forEach(child => {
+                child.style.backgroundColor = "#fdaaaa";
+            });
+        });
+        button.addEventListener("mouseleave", () => {
+            Array.from(button.children).forEach(child => {
+                child.style.backgroundColor = "#ffd5d5";
+            });
+        });
     })
     timeGreeting();
     loadAndDisplayImages(); //update for later: make it so that only one image appears -- right now its reiterating the list and re-displaying every item
