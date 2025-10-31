@@ -1,7 +1,7 @@
 chrome.runtime.onInstalled.addListener(() => {
     chrome.alarms.create("waterPlants", {
         periodInMinutes: 1440,
-        when: Date.now() + 1000;
+        when: Date.now() + 1000,
     });
 });
 
